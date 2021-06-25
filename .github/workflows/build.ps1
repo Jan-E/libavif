@@ -25,11 +25,13 @@ $on = if ($architecture -eq "x64") {"1"} else {"0"}
 cmake "-G" "$generator" "-A" "$platform" "-DENABLE_DOCS=0" "-DENABLE_EXAMPLES=0" "-DENABLE_TESTDATA=0" "-DENABLE_TESTS=0" "-DENABLE_TOOLS=0" "-DENABLE_NASM=1" "-DENABLE_SSE2=$on" "-DENABLE_SSE3=$on" "-DENABLE_SSSE3=$on" "-DENABLE_SSE4_1=$on" "-DENABLE_SSE4_2=$on" "-DENABLE_AVX=$on" "-DENABLE_AVX2=$on" ".."
 msbuild "/t:Build" "/p:Configuration=RelWithDebInfo" "/p:Platform=$platform" "AOM.sln"
 xcopy "RelWithDebInfo\*.lib" "."
+xcopy "RelWithDebInfo\*.pdb" "."
+xcopy "RelWithDebInfo\*.lib" "..\..\..\winlibs\lib\"
+xcopy "RelWithDebInfo\*.pdb" "..\..\..\winlibs\lib\"
 Set-Location "..\..\.."
 
-cmake "$generator" -A "$platform" -DAVIF_CODEC_AOM=1 -DAVIF_LOCAL_AOM=1 -DAVIF_ENABLE_WERROR=0 .
+cmake "$generator" -A "$platform" -DAVIF_CODEC_AOM=1 -DAVIF_LOCAL_AOM=1 -DAVIF_ENABLE_WERROR=0 -DBUILD_SHARED_LIBS=0 .
 msbuild "/t:Build" "/p:Configuration=RelWithDebInfo" "/p:Platform=$platform" "libavif.sln"
-xcopy "RelWithDebInfo\avif.dll" "winlibs\bin\*"
-xcopy "RelWithDebInfo\avif.pdb" "winlibs\bin\*"
-xcopy "include\avif\avif.h" "winlibs\include\avif\*"
-xcopy "RelWithDebInfo\avif.lib" "winlibs\lib\*"
+xcopy "include\avif\avif.h" "winlibs\include\avif\"
+xcopy "RelWithDebInfo\avif.lib" "winlibs\lib\"
+xcopy "RelWithDebInfo\avif.pdb" "winlibs\lib\"
