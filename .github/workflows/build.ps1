@@ -30,5 +30,6 @@ Set-Location "..\..\.."
 cmake "$generator" -A "$platform" -DAVIF_CODEC_AOM=1 -DAVIF_LOCAL_AOM=1 -DAVIF_ENABLE_WERROR=0 .
 msbuild "/t:Build" "/p:Configuration=RelWithDebInfo" "/p:Platform=$platform" "libavif.sln"
 xcopy "RelWithDebInfo\avif.dll" "winlibs\bin\*"
+xcopy "RelWithDebInfo\avif.pdb" "winlibs\bin\*"
 xcopy "include\avif\avif.h" "winlibs\include\avif\*"
 xcopy "RelWithDebInfo\avif.lib" "winlibs\lib\*"
