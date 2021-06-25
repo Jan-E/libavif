@@ -7,6 +7,7 @@ cd build.libavif
 cmake -G "Visual Studio 16 2019" -A x64 -DENABLE_DOCS=0 -DENABLE_EXAMPLES=0 -DENABLE_TESTDATA=0 -DENABLE_TESTS=0 -DENABLE_TOOLS=0 -DENABLE_NASM=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE4_1=1 -DENABLE_SSE4_2=1 -DENABLE_AVX=1 -DENABLE_AVX2=1 ..
 msbuild /t:Build /p:Configuration=Release /p:Platform=x64 AOM.sln
 xcopy Release\*.??b .
+xcopy Release\aom.lib .\aom_a.lib*
 cd ..\..\..
 if exist CMakeCache.txt del CMakeCache.txt
 if exist CMakeFiles rd CMakeFiles /s /q
