@@ -12,5 +12,5 @@ xcopy .\aom_a.lib ..\..\..\RelWithDebInfo\* /y
 cd ..\..\..
 if exist CMakeCache.txt del CMakeCache.txt
 if exist CMakeFiles rd CMakeFiles /s /q
-cmake -G "Visual Studio 16 2019" -A x64 -DAVIF_CODEC_AOM=1 -DAVIF_LOCAL_AOM=1 -DAVIF_ENABLE_WERROR=0 -DBUILD_SHARED_LIBS=0 .
+cmake -G "Visual Studio 16 2019" -A x64 -DAVIF_CODEC_AOM=1 -DAVIF_LOCAL_AOM=1 -DAVIF_ENABLE_WERROR=0 .
 msbuild /t:Build /p:Configuration=RelWithDebInfo /p:Platform=x64 libavif.sln
